@@ -1,0 +1,4 @@
+label,BENIGN,CRITICAL,HIGH,LOW,MEDIUM
+benign,5864,0,0,14,0
+blaster,0,1762,204,1,850
+sasser,0,2446,1,0,4

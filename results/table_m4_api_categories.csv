@@ -1,0 +1,19 @@
+Category,Class,Proportion
+Process Injection,blaster,0.0
+Process Injection,sasser,0.0
+Process Injection,benign,0.0022
+Network C2,blaster,0.0
+Network C2,sasser,0.0
+Network C2,benign,0.0
+Registry Persistence,blaster,0.0
+Registry Persistence,sasser,0.0
+Registry Persistence,benign,0.0105
+Service Persistence,blaster,0.0
+Service Persistence,sasser,0.0
+Service Persistence,benign,0.0012
+Anti-Debug / Evasion,blaster,0.0
+Anti-Debug / Evasion,sasser,0.0
+Anti-Debug / Evasion,benign,0.0
+Privilege Escalation,blaster,0.0323
+Privilege Escalation,sasser,0.0
+Privilege Escalation,benign,0.0323

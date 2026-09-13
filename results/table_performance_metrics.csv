@@ -1,0 +1,8 @@
+Metric,Value
+Accuracy,0.9999
+Precision,1.0000
+Recall,0.9998
+F1,0.9999
+Fpr,0.0000
+Fnr,0.0002
+Auc,1.0000

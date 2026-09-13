@@ -1,0 +1,6 @@
+System,Detection Rate (%),FPR (%),F1-Score (%),AUC
+Signature Only,0.0,0.0,0.0,0.5
+Fuzzy Hash Only,80.0,0.0,88.9,0.9
+ML Structural,100.0,0.1,100.0,1.0
+Deep Learning Semantic,76.2,0.2,86.4,0.868
+WHSF (Proposed),100.0,0.0,100.0,1.0
