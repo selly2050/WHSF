@@ -8,10 +8,9 @@ with the identical seed (42) and the identical sample order of results/features.
 --verify : retrains the RF per fold and compares the reproduced OOF m3_score with results/scores_m3.csv
            (an exact match proves the published splits are the ones actually used in the paper)
 
-Run from the repository root (the folder that contains results/):
-    cd /d D:\PhD\2026
-    python splits\export_splits.py --verify
-Works whether step3_ml_structural.py is in scripts\ or directly in the root; manifest is optional.
+Usage (from any directory — the script changes to the repository root by itself):
+    python splits/export_splits.py --verify
+Works whether step3_ml_structural.py is in scripts/ or directly in the repository root.
 r"""
 import sys, os, numpy as np, pandas as pd
 from sklearn.model_selection import StratifiedKFold, train_test_split

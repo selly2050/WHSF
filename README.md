@@ -10,6 +10,15 @@ Reproducibility package for **IJIES Paper ID 20265713**.
 - `manifest/sample_hashes.csv` — SHA-256 / MD5 of every evaluated sample
 - `requirements.txt` — pinned dependency versions
 
+## Quick start (reviewer)
+```bash
+git clone https://github.com/selly2050/WHSF.git
+cd WHSF                                   # <- all commands below run from this repository root
+pip install -r requirements.txt
+python splits/export_splits.py --verify   # prints IDENTICAL: the published splits reproduce the stored scores
+python scripts/01_recompute_all_metrics.py results/final_scores.csv
+```
+
 ## Requirements
 Python ≥ 3.11 (tested with Python 3.14.0 on Windows 11). Install the pinned dependencies
 (matplotlib/seaborn are needed because the training scripts also produce figures):
