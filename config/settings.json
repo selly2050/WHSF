@@ -1,0 +1,41 @@
+{
+  "paper_id": "IJIES 20265713",
+  "random_seed": 42,
+  "evaluation": {
+    "cross_validation": "StratifiedKFold(n_splits=5, shuffle=True, random_state=42)",
+    "holdout": "train_test_split(test_size=0.20, random_state=42, stratify=y)",
+    "per_sample_scores": "out-of-fold: every sample is scored by the fold model that never saw it (scripts/step3_ml_structural.py, OOF loop); see results/scores_m2.csv, scores_m3.csv, scores_m4.csv, final_scores.csv",
+    "split_files": ["splits/folds_5fold.csv", "splits/holdout_80_20.csv"],
+    "split_exporter": "splits/export_splits.py  (run with --verify to prove the splits reproduce results/scores_m3.csv exactly)"
+  },
+  "corpus": {
+    "total": 11146, "blaster": 2817, "sasser": 2451, "benign": 5878,
+    "manifest": "manifest/sample_hashes.csv (SHA-256 / MD5 of every evaluated sample; binaries not redistributed)"
+  },
+  "M1_exact_hash":   {"weight": 0.40, "method": "SHA-256 / MD5 exact match against the known-sample manifest"},
+  "M2_fuzzy_hash":   {"weight": 0.25, "method": "CTPH via ppdeep (pure-Python SSDeep); Jaccard 4-gram fallback", "threshold": 0.35},
+  "M3_structural_ml": {
+    "weight": 0.20,
+    "model": "RandomForestClassifier(n_estimators=200, class_weight='balanced', random_state=42)",
+    "features": "54 PE structural features = FEATURE_COLS in scripts/step3_ml_structural.py",
+    "score": "maximum malware-class out-of-fold probability"
+  },
+  "M4_deep_semantic": {
+    "weight": 0.15,
+    "architecture": "embedding -> parallel Conv1D (k=3, k=5; 128 filters each) -> concat -> BiLSTM(64) -> dropout -> sigmoid",
+    "input": "PE import-table API names",
+    "vocab_size": 512, "max_seq_len": 100, "embed_dim": 64, "lstm_units": 64, "dropout": 0.4,
+    "optimizer": "Adam", "learning_rate": 0.001, "batch_size": 256, "epochs": 20
+  },
+  "fusion": {
+    "method": "NDR - Normalized Dynamic Redistribution over active modalities: w_k,eff = w_k / sum_{j in A} w_j",
+    "decision_threshold_FTS": 0.35
+  },
+  "table_reproduction": {
+    "tables_8_9_10_12_13": "python scripts/01_recompute_all_metrics.py results/final_scores.csv",
+    "table_9_fusion_alternatives": "python scripts/03_ndr_vs_fusion_alternatives.py results/final_scores.csv",
+    "table_11_conventional_baselines": "python scripts/05_external_baselines.py results/features.csv"
+  },
+  "software": {"python": "3.12", "pytorch": "2.5.1 (CUDA 12.1)", "scikit-learn": "see requirements.txt"},
+  "hardware": "Intel Core i7-13700H, 16 GB DDR5-5200, NVIDIA RTX 4060 Laptop (8 GB), Windows 11"
+}
